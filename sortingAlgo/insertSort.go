@@ -10,9 +10,11 @@ func InsertSort() {
 		prev := i - 1
 		for prev >= 0 && arr[prev] > curr {
 			arr[prev+1] = arr[prev]
+			fmt.Println(arr)
 			prev--
+			arr[prev+1] = curr
 		}
-		arr[prev+1] = curr
+
 	}
 	fmt.Println(arr)
 }

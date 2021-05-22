@@ -1,9 +1,21 @@
 package main
 
-// func selectionSort(array []int) {
-// 	for i:=0; i
-// }
+import (
+	"fmt"
+)
+
+func FibonacciRecursion(n int) int {
+	if n <= 1 {
+		return n
+	}
+	return FibonacciRecursion(n-1) + FibonacciRecursion(n-2)
+}
 
 func main() {
 
+	fmt.Println("")
+	for i := 0; i <= 50; i++ {
+		fmt.Println(FibonacciRecursion(i), " ")
+	}
+	fmt.Println("")
 }

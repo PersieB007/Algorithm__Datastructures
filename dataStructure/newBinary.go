@@ -29,6 +29,19 @@ func PostorderRecursive(root *BinaryNode) {
 	}
 }
 
+func getDepth(n *BinaryNode) int {
+	if n == nil {
+		return 0
+	}
+	left := getDepth(n.left)
+	right := getDepth(n.right)
+	if left > right {
+		log.Println("left")
+		return left + 1
+	}
+	return right + 1
+}
+
 func Runner() {
 	// r := &BinaryTree{}
 	// r.InsertRoot(10)

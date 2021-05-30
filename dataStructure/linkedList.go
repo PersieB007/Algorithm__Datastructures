@@ -2,39 +2,52 @@ package dataStructure
 
 import "fmt"
 
-type Node struct {
-	prev *Node
-	next *Node
-	key  interface{}
+type Song struct {
+	name   string
+	artist string
+	next   *Song
 }
 
-type LinkedList struct {
-	head *Node
-	tail *Node
+type Playlist struct {
+	name       string
+	head       *Song
+	nowPlaying *Song
 }
 
-func (L *LinkedList) Insert(key interface{}) {
-	list := &Node{
-		next: L.head,
-		key:  key,
+func CreatePlaylist(name string) *Playlist {
+	return &Playlist{
+		name: name,
 	}
-	if L.head != nil {
-		L.head.prev = list
-	}
-	L.head = list
-
-	l := L.head
-	for l.next != nil {
-		l = l.next
-	}
-	L.tail = l
 }
 
-func (l *LinkedList) Display() {
-	list := l.head
-	for list != nil {
-		fmt.Printf("%+v ->", list.key)
-		list = list.next
+func (p *Playlist) AddSong(name, artist string) error {
+	s := &Song{
+		name:   name,
+		artist: artist,
 	}
-	fmt.Println()
+	if p.head == nil {
+		p.head = s
+	} else {
+		currentNode := p.head
+		for currentNode.next != nil {
+			currentNode = currentNode.next
+		}
+		currentNode.next = s
+	}
+	return nil
+}
+
+func (p *Playlist) showAllSongs() error {
+	currentNode := p.head
+	if currentNode == nil {
+		fmt.Println("Playlist is empty.")
+		return nil
+	}
+	fmt.Printf("%+v\n", *currentNode)
+	for currentNode.next != nil {
+		currentNode = currentNode.next
+		fmt.Printf("%+v\n", *currentNode)
+	}
+
+	return nil
 }
